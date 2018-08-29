@@ -89,7 +89,7 @@ void *HandleUserAgentClientRequest(BareosSocket *user_agent_socket)
    ua->UA_sock = user_agent_socket;
    SetJcrInTsd(INVALID_JCR);
 
-   if (!AuthenticateUserAgent(ua)) {
+   if (!AuthenticateUserAgent(ua, GetResWithName)) {
       goto getout;
    }
 

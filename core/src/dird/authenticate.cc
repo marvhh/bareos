@@ -34,6 +34,7 @@
 #include "dird.h"
 #include "dird/fd_cmds.h"
 #include "lib/bnet.h"
+#include "dird/authenticate.h"
 
 static const int debuglevel = 50;
 
@@ -241,7 +242,7 @@ static inline bool count_console_connections()
 /**
  * Authenticate user agent.
  */
-bool AuthenticateUserAgent(UaContext *uac)
+bool AuthenticateUserAgent(UaContext *uac, GetResWithNameCb_t GetResWithNameCb)
 {
    char name[MAX_NAME_LENGTH];
    ConsoleResource *cons = NULL;
@@ -267,7 +268,7 @@ bool AuthenticateUserAgent(UaContext *uac)
           NULL, "Console", "*UserAgent*", me->password, me);
    } else {
       UnbashSpaces(name);
-      cons = (ConsoleResource *)GetResWithName(R_CONSOLE, name);
+      cons = (ConsoleResource *)(*GetResWithNameCb)(R_CONSOLE, name, false);
       if (cons) {
          auth_success =
              ua->AuthenticateInboundConnection(NULL, "Console", name, cons->password, cons);

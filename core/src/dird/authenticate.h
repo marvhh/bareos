@@ -21,10 +21,11 @@
 
 #ifndef BAREOS_DIRD_AUTHENTICATE_H_
 #define BAREOS_DIRD_AUTHENTICATE_H_
+typedef CommonResourceHeader* (*GetResWithNameCb_t)(int, const char *, bool);
 
 bool AuthenticateWithStorageDaemon(JobControlRecord *jcr, StorageResource *store);
 bool AuthenticateWithFileDaemon(JobControlRecord *jcr);
 bool AuthenticateFileDaemon(BareosSocket *fd, char *client_name);
-bool AuthenticateUserAgent(UaContext *ua);
+bool AuthenticateUserAgent(UaContext *uac, GetResWithNameCb_t GetResWithNameCb);
 
 #endif // BAREOS_DIRD_AUTHENTICATE_H_
