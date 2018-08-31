@@ -5,6 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
+                sh 'ls'
                 sh 'dpkg-buildpackage -us -uc'
             }
         }
