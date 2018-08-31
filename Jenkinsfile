@@ -7,6 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
+		sh 'DEBIAN_FRONTEND=noninteractive apt-get -y install devscripts debhelper build-essential'
                 sh 'dpkg-buildpackage -us -uc'
             }
         }
