@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'ls'
+		sh 'fakeroot debian/rules clean'
                 sh 'dpkg-buildpackage -us -uc'
             }
         }
