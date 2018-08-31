@@ -7,6 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
+                sh 'dpkg-buildpackage -us -uc'
             }
         }
         stage('Test') {
