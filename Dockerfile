@@ -2,6 +2,10 @@
 FROM debian:stretch
 ENV DEBIAN_FRONTEND=noninteractive
 USER root
+RUN http://download.bareos.org/bareos/release/16.2/Debian_8.0/Release.key
+RUN echo "deb http://download.bareos.org/bareos/release/16.2/Debian_8.0 /" > /etc/apt/sources.list.d/bareos.list
+RUN echo "deb-src http://download.bareos.org/bareos/release/16.2/Debian_8.0 /" >> /etc/apt/sources.list.d/bareos.list
 RUN apt-get update
 RUN apt-get -y install devscripts debhelper build-essential
+RUN apt-get -y build-dep bareos
 USER jenkins
